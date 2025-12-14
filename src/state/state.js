@@ -8,27 +8,23 @@ const state = {
 
 /* STATE WRITE FUNCTIONS */
 
-function addSkillQuest(title) {
+export function addSkillQuest(title) {
   const quest = createSkillQuest(title);
 
   state.skillQuests.push(quest);
   return quest;
 }
 
-function addSubQuest(skillQuestId, title) {
-  const quest = state.skillQuests.find((quest) => quest.id === skillQuestId);
+export function addSubQuest(id, title) {
+  const quest = getSkillQuestbyId(id);
   const sub = createSubQuest(title);
 
   quest.subquests.push(sub);
   return sub;
 }
 
-function addTask(subQuestId, title, description, targetDate, priority) {
-  let subquests = [];
-  state.skillQuests.forEach((quest) => {
-    subquests.push(...quest.subquests);
-  });
-  const subquest = subquests.find((sq) => sq.id === subQuestId);
+export function addTask(id, title, description, targetDate, priority) {
+  const subquest = getSubQuestbyId(id);
   const task = createTask(title, description, targetDate, priority);
 
   subquest.tasks.push(task);
@@ -37,16 +33,18 @@ function addTask(subQuestId, title, description, targetDate, priority) {
 
 /* STATE READ FUNCTIONS */
 
-function getAllSkillQuests() {
+export function getAllSkillQuests() {
   return state.skillQuests;
 }
 
-function getSkillQuestbyId(id) {}
-function getSubQuestbyId(id) {}
+export function getSkillQuestbyId(id) {
+  return state.skillQuests.find((quest) => quest.id === id);
+}
 
-// function removeSkillQuest(id) {}
-// function removeSubQuest(skillQuestId, subQuestId) {}
-// function toggleTask(taskId) {}
-// function removeTask(taskId) {}
-
-export { addSkillQuest, addSubQuest, addTask, getAllSkillQuests };
+export function getSubQuestbyId(id) {
+  let subquests = [];
+  state.skillQuests.forEach((quest) => {
+    subquests.push(...quest.subquests);
+  });
+  return subquests.find((sub) => sub.id === id);
+}
