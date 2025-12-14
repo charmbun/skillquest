@@ -1,8 +1,9 @@
-function createTask(title, description, targetDate, priority) {
-  const id = crypto.randomUUID();
-  return { id, title, description, targetDate, priority };
+export function createTask(title, description, targetDate, priority) {
+  return {
+    id: crypto.randomUUID(),
+    title,
+    description,
+    targetDate,
+    priority,
+  };
 }
-
-// function toggleComplete() {}
-
-export { createTask };

@@ -1,10 +1,7 @@
-function createSubQuest(title) {
-  let tasks = [];
-  const id = crypto.randomUUID();
-  return { id, title, tasks };
+export function createSubQuest(title) {
+  return {
+    id: crypto.randomUUID,
+    title,
+    tasks: [],
+  };
 }
-
-// function addTask() {}
-// function removeTask() {}
-
-export { createSubQuest };

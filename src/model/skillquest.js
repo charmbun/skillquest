@@ -1,10 +1,7 @@
-function createSkillQuest(title) {
-  let subquests = [];
-  const id = crypto.randomUUID();
-  return { id, title, subquests };
+export function createSkillQuest(title) {
+  return {
+    id: crypto.randomUUID(),
+    title,
+    subquests: [],
+  };
 }
-
-// function addSubQuest() {}
-// function removeSubQuest() {}
-
-export { createSkillQuest };
