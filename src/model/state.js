@@ -1,19 +1,37 @@
-/* CORE LOGIC API */
-// These are what UI calls.
+import { createSkillQuest } from "./skillquest";
+import { createSubQuest } from "./subquest";
+import { createTask } from "./task";
 
-// ✅ hold the data
-// ✅ expose functions to read the data
-// ✅ expose functions to change the data
-// ✅ be the only place that mutates state
+const state = {
+  skillQuests: [],
+};
 
-getSkillQuests();
+function addSkillQuest(title) {
+  const quest = createSkillQuest(title);
+  state.skillQuests.push(quest);
+}
 
-addSkillQuest(title);
-removeSkillQuest(id);
+function addSubQuest(skillQuestId, title) {
+  const quest = state.skillQuests.find((quest) => quest.id === skillQuestId);
+  const sub = createSubQuest(title);
+  quest.subquests.push(sub);
+}
 
-addSubQuest(skillQuestId, title);
-removeSubQuest(skillQuestId, subQuestId);
+function addTask(subQuestId, title, description, targetDate, priority) {
+  let subquests = [];
+  state.skillQuests.forEach((quest) => {
+    subquests.push(...quest.subquests);
+  });
+  const subquest = subquests.find((sq) => sq.id === subQuestId);
 
-addTask(subQuestId, taskData);
-toggleTask(taskId);
-removeTask(taskId);
+  const task = createTask(title, description, targetDate, priority);
+  subquest.tasks.push(task);
+}
+
+// function getSkillQuests() {}
+// function removeSkillQuest(id) {}
+// function removeSubQuest(skillQuestId, subQuestId) {}
+// function toggleTask(taskId) {}
+// function removeTask(taskId) {}
+
+export { addSkillQuest, addSubQuest, addTask };
