@@ -1,5 +1,8 @@
-// create Task objects
-// task-related behavior
+function createTask(title, description, targetDate, priority) {
+  const id = crypto.randomUUID();
+  return { id, title, description, targetDate, priority };
+}
 
-createTask(title, description, dueDate, priority)
-toggleComplete()
+// function toggleComplete() {}
+
+export { createTask };

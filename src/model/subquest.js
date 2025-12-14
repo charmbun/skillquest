@@ -1,7 +1,10 @@
-// create subquest objects
-// manage tasks
+function createSubQuest(title) {
+  let tasks = [];
+  const id = crypto.randomUUID();
+  return { id, title, tasks };
+}
 
-createSubQuest(title)
-addTask()
+// function addTask() {}
+// function removeTask() {}
 
-removeTask()
+export { createSubQuest };

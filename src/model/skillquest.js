@@ -1,8 +1,10 @@
-// create SkillQuest objects
-// manage subquests
+function createSkillQuest(title) {
+  let subquests = [];
+  const id = crypto.randomUUID();
+  return { id, title, subquests };
+}
 
-createSkillQuest()
+// function addSubQuest() {}
+// function removeSubQuest() {}
 
-addSubQuest()
-
-removeSubQuest()
+export { createSkillQuest };
