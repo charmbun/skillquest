@@ -1,6 +1,6 @@
-import { createSkillQuest } from "./skillquest";
-import { createSubQuest } from "./subquest";
-import { createTask } from "./task";
+import { createSkillQuest } from "../model/skillquest.js";
+import { createSubQuest } from "../model/subquest.js";
+import { createTask } from "../model/task.js";
 
 const state = {
   skillQuests: [],
@@ -49,4 +49,4 @@ function getSubQuestbyId(id) {}
 // function toggleTask(taskId) {}
 // function removeTask(taskId) {}
 
-export { addSkillQuest, addSubQuest, addTask };
+export { addSkillQuest, addSubQuest, addTask, getAllSkillQuests };
