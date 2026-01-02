@@ -1,14 +1,9 @@
-import {
-  addSkillQuest,
-  addSubQuest,
-  addTask,
-  getAllSkillQuests,
-  getSkillQuestbyId,
-  getSubQuestbyId,
-} from "./state/state.js";
-import { render } from "./ui/render.js";
 import "./styles/main.css";
+import { render } from "./ui/render.js";
 
+render();
+
+/*
 const quest = addSkillQuest("Web Programming");
 console.log("Quest: ", quest);
 console.log("Quest given ID: ", getSkillQuestbyId(quest.id));
@@ -29,5 +24,4 @@ const quest2 = addSkillQuest("Nihonggo");
 
 const allQuest = getAllSkillQuests();
 console.log("All Quests: ", allQuest);
-
-render();
+*/
