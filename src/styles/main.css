@@ -1,0 +1,96 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(200px, 10%) minmax(200px, 10%) minmax(0, 1fr);
+  grid-template-rows:
+    minmax(60px, auto) minmax(48px, auto) minmax(36px, auto)
+    minmax(0, 1fr);
+}
+
+.header {
+  grid-column: 1 / 4;
+
+  background-color: black;
+  color: white;
+  font-weight: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.header p {
+  font-size: 1.6em;
+}
+
+.logo {
+  max-height: 36px;
+}
+
+.quest-nav {
+  grid-column: 1 / 2;
+  grid-row: 2 / 5;
+}
+
+.quest-content {
+  display: grid;
+  grid-column: 2 /4;
+  grid-row: 2 / 5;
+}
+
+.quest-title {
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+}
+
+.sub-nav {
+  grid-column: 2 / 3;
+  grid-row: 3 / 5;
+  background-color: blue;
+}
+
+.sub-title {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
