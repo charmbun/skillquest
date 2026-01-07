@@ -1,41 +1,102 @@
-import { addSkillQuest, getAllSkillQuests } from "../state/state.js";
+/**
+ * UI Renderer for SkillQuest
+ * --------------------------
+ * Responsible for:
+ * - Reading state
+ * - Building DOM
+ * - Wiring UI events
+ *
+ * NOTE:
+ * This file MUST NOT store state.
+ * It only calls state mutation + read functions.
+ */
 
+import {
+  addSkillQuest,
+  addSubQuest,
+  addTask,
+  getAllSkillQuests,
+  getSkillQuestbyId,
+  getSubQuestbyId,
+} from "../state/state.js";
+
+/**
+ * Main render function
+ * Rebuilds the entire UI based on current state
+ */
 export function render() {
   const app = document.querySelector("#app");
 
-  // Clear old content
+  /* =========================
+     RESET UI
+     ========================= */
   app.innerHTML = "";
 
-  // UI: Form + Button
-  const questForm = document.createElement("input");
-  questForm.id = "quest-form";
-  questForm.type = "text";
-  questForm.placeholder = "Add a new Skill Quest";
+  /* =========================
+     CREATE QUEST INPUT UI
+     ========================= */
+  const questInput = document.createElement("input");
+  questInput.type = "text";
+  questInput.placeholder = "Add a new Skill Quest";
 
-  const addQuestBtn = document.createElement("button");
-  addQuestBtn.id = "add-quest-btn";
-  addQuestBtn.textContent = "Add Quest";
+  const questBtn = document.createElement("button");
+  questBtn.id = "quest-btn";
+  questBtn.textContent = "Add Quest";
 
-  app.appendChild(questForm);
-  app.appendChild(addQuestBtn);
+  app.append(questInput, questBtn);
 
-  // Display All Quests
+  /* =========================
+     READ STATE
+     ========================= */
   const quests = getAllSkillQuests();
-  console.log("Quests: ", quests);
 
+  /* =========================
+     RENDER SKILL QUESTS
+     ========================= */
   quests.forEach((quest) => {
-    const div = document.createElement("div");
-    div.textContent = quest.title;
-    app.appendChild(div);
+    // --- Quest container ---
+    const questDiv = document.createElement("div");
+    questDiv.classList.add("quest");
+
+    // --- Quest title ---
+    const questTitle = document.createElement("h3");
+    questTitle.textContent = quest.title;
+
+    // --- SubQuest input ---
+    const subInput = document.createElement("input");
+    subInput.type = "text";
+    subInput.placeholder = "Add a new Sub Quest";
+
+    // --- SubQuest button ---
+    const subBtn = document.createElement("button");
+    subBtn.id = "sub-btn";
+    subBtn.textContent = "Add SubQuest";
+
+    subBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+      addSubQuest(quest.id, subInput.value);
+      render();
+    });
+
+    // --- SubQuest list ---
+    const subQuestDiv = document.createElement("div");
+    quest.subquests.forEach((sub) => {
+      const subTitle = document.createElement("h4");
+      subTitle.textContent = sub.title;
+      subQuestDiv.appendChild(subTitle);
+    });
+
+    // --- Assemble quest block ---
+    questDiv.append(questTitle, subInput, subBtn, subQuestDiv);
+    app.appendChild(questDiv);
   });
 
-  // Event Listeners
-  addQuestBtn.addEventListener("click", (event) => {
+  /* =========================
+     EVENT LISTENERS
+     ========================= */
+  questBtn.addEventListener("click", (event) => {
     event.preventDefault();
-
-    const questValue = questForm.value;
-    addSkillQuest(questValue);
-
+    addSkillQuest(questInput.value);
     render();
   });
 }
