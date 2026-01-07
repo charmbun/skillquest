@@ -62,6 +62,9 @@ export function render() {
     const questTitle = document.createElement("h3");
     questTitle.textContent = quest.title;
 
+    /* =========================
+     RENDER SUBQUESTS
+     ========================= */
     // --- SubQuest input ---
     const subInput = document.createElement("input");
     subInput.type = "text";
@@ -78,12 +81,40 @@ export function render() {
       render();
     });
 
-    // --- SubQuest list ---
     const subQuestDiv = document.createElement("div");
+
     quest.subquests.forEach((sub) => {
+      // --- SubQuest title ---
       const subTitle = document.createElement("h4");
       subTitle.textContent = sub.title;
-      subQuestDiv.appendChild(subTitle);
+
+      /* =========================
+     RENDER TASKS
+     ========================= */
+      // --- Task input ---
+      const taskInput = document.createElement("input");
+      taskInput.type = "text";
+      taskInput.placeholder = "Add a new Task";
+
+      // --- Task button ---
+      const taskBtn = document.createElement("button");
+      taskBtn.id = "task-btn";
+      taskBtn.textContent = "Add Task";
+
+      taskBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        addTask(sub.id, taskInput.value);
+        render();
+      });
+
+      const taskQuestDiv = document.createElement("div");
+      sub.tasks.forEach((task) => {
+        const taskTitle = document.createElement("p");
+        taskTitle.textContent = task.title;
+        taskQuestDiv.appendChild(taskTitle);
+      });
+
+      subQuestDiv.append(subTitle, taskInput, taskBtn, taskQuestDiv);
     });
 
     // --- Assemble quest block ---
