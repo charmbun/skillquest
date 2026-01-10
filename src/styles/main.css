@@ -1,37 +1,10 @@
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 * {
   margin: 0;
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
+:root {
+  --quest-bg: #a0c2fe;
+  --task-bg: #bfd8ff;
 }
 
 body {
@@ -68,29 +41,50 @@ body {
   max-height: 36px;
 }
 
-.quest-nav {
+.quest.nav {
   grid-column: 1 / 2;
   grid-row: 2 / 5;
+  background-color: rgb(207, 207, 207);
 }
 
-.quest-content {
+.quest.content {
   display: grid;
   grid-column: 2 /4;
   grid-row: 2 / 5;
 }
 
-.quest-title {
+.quest.title {
   grid-column: 2 / 4;
   grid-row: 2 / 3;
+  background-color: var(--quest-bg);
 }
 
-.sub-nav {
+.sub.nav {
   grid-column: 2 / 3;
   grid-row: 3 / 5;
-  background-color: blue;
+  background-color: rgb(224, 224, 224);
 }
 
-.sub-title {
+.sub.title {
   grid-column: 3 / 4;
   grid-row: 3 / 4;
+  background-color: var(--task-bg);
+}
+
+.quest.title,
+.sub.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+.nav p {
+  font-size: 1em;
+  margin: 0.8em;
+  text-align: center;
+}
+
+.task.content {
+  background-color: rgb(244, 244, 244);
 }
